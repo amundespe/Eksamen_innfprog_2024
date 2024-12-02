@@ -96,6 +96,21 @@
         ]
 
         
+// Dynamisk generering av oppgaveliste
+let todoListHTML = "";
+for (const todo of todos) {
+    const statusClass = todo.status === "Done" ? "task-status-done" : "task-status-todo";
+    todoListHTML += `
+        <li>
+            <span class="task-text">${todo.text}</span>
+            <span class="task-status ${statusClass}">${todo.status}</span>
+        </li>
+    `;
+}
+
+// Oppdaterer innholdet i #todolist
+document.getElementById("todolist").innerHTML = todoListHTML;
+        
         //CLOCK
         
     </script>
