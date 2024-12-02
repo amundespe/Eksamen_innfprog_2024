@@ -61,7 +61,20 @@
             {lastname: "Jansson", firstname: "Sigried", office: "B1", mail: "s.jansson@company.com"}
         ]
 
+        //Minstekrav 2 - Gjort epostene klikkbare
         let contactlist = ""
+
+        for (let i = 0; i < contacts.length; i++) {
+            const contact = contacts[i];
+            contactlist += "<article>";
+            contactlist += "<p><strong>" + contact.lastname + ", " + contact.firstname + "</strong><br />";
+            contactlist += "Kontor: " + contact.office + " | ";
+            contactlist += "<a href='mailto:" + contact.mail + "'>" + contact.mail + "</a>";
+            contactlist += "</p>";
+            contactlist += "</article>";
+        }
+        
+        document.getElementById("contactlist").innerHTML = contactlist;
 
         contacts.map((contact, index) => {
             contactlist += `<article>
@@ -96,20 +109,21 @@
         ]
 
         
-// Dynamisk generering av oppgaveliste
-let todoListHTML = "";
-for (const todo of todos) {
-    const statusClass = todo.status === "Done" ? "task-status-done" : "task-status-todo";
+    // Minstekrav 1 - Dynamisk generering av oppgaveliste (må fikses)
+    let todoListHTML = ""
+    for (let i = 0; i < todos.length; i++) {
     todoListHTML += `
         <li>
-            <span class="task-text">${todo.text}</span>
-            <span class="task-status ${statusClass}">${todo.status}</span>
+            <span class="task-text">${todos[i].text}</span>
+            <span class="task-status task-status-${todos[i].status.toLowerCase().replace(" ", "-")}">
+                ${todos[i].status}
+            </span>
         </li>
     `;
-}
+    }
 
-// Oppdaterer innholdet i #todolist
-document.getElementById("todolist").innerHTML = todoListHTML;
+    // Oppdaterer innholdet i #todolist
+    document.getElementById("todolist").innerHTML = todoListHTML;
         
         //CLOCK
         
