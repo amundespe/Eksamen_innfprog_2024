@@ -52,6 +52,8 @@
     </main>
 
     <script>
+        onload = startTime;
+
         //CONTACTS
         const contacts = [
             {lastname: "Hansen", firstname: "Stine", office: "D2", mail: "s.hansen@company.com"},
@@ -61,25 +63,13 @@
             {lastname: "Jansson", firstname: "Sigried", office: "B1", mail: "s.jansson@company.com"}
         ]
 
-        //Minstekrav 2 - Gjort epostene klikkbare
+        //Minstekrav 2 - Gjort epostene klikkbare ved å bruke en mailto-lenke på contact.mail
         let contactlist = ""
-
-        for (let i = 0; i < contacts.length; i++) {
-            const contact = contacts[i];
-            contactlist += "<article>";
-            contactlist += "<p><strong>" + contact.lastname + ", " + contact.firstname + "</strong><br />";
-            contactlist += "Kontor: " + contact.office + " | ";
-            contactlist += "<a href='mailto:" + contact.mail + "'>" + contact.mail + "</a>";
-            contactlist += "</p>";
-            contactlist += "</article>";
-        }
         
-        document.getElementById("contactlist").innerHTML = contactlist;
-
         contacts.map((contact, index) => {
             contactlist += `<article>
                 <p><strong>${contact.lastname}, ${contact.firstname}</strong><br />
-                    Kontor: ${contact.office} | E-post: ${contact.mail}</p>
+                    Kontor: ${contact.office} | E-post: <a href="mailto:${contact.mail}">${contact.mail}</a></p>
             </article>`
         })
 
@@ -109,24 +99,33 @@
         ]
 
         
-    // Minstekrav 1 - Dynamisk generering av oppgaveliste (må fikses)
-    let todoListHTML = ""
-    for (let i = 0; i < todos.length; i++) {
-    todoListHTML += `
-        <li>
-            <span class="task-text">${todos[i].text}</span>
-            <span class="task-status task-status-${todos[i].status.toLowerCase().replace(" ", "-")}">
-                ${todos[i].status}
-            </span>
-        </li>
-    `;
-    }
+        // Minstekrav 1 - Dynamisk generering av oppgaveliste (må fikses)
+        let todoListHTML = ""
+        todos.map((todo, index) => {
+            todoListHTML += `<li>
+                <span class="task-text">${todo.text}</span>
+                <span class="task-status task-status-${todo.status.toLowerCase()}">${todo.status}</span>
+            </li>` 
+        })
 
-    // Oppdaterer innholdet i #todolist
-    document.getElementById("todolist").innerHTML = todoListHTML;
+        // Oppdaterer innholdet i #todolist
+        document.getElementById("todolistHTML").innerHTML = todoListHTML;
         
         //CLOCK
-        
+        //Klokke-skript tatt herifra: https://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock
+        function startTime() {
+            const today = new Date();
+            let h = today.getHours();
+            let m = today.getMinutes();
+            m = checkTime(m);
+            document.getElementById('clock').innerHTML = h + ":" + m;
+            setTimeout(startTime, 1000);
+        }
+
+        function checkTime(i) {
+            if (i < 10) {i = "0" + i};  // legger til en null foran tall mindre enn 10
+            return i;
+        }
     </script>
 </body>
 </html>
