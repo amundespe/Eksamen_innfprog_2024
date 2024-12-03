@@ -32,7 +32,7 @@
         </section>
         <section id="todoform">
             <h2>Ny oppgave</h2>
-            <p><label for="task">Oppgavetekst:</label><br /><input type="text" id="task" /><button id="savetask">Lagre</button></p>
+            <p><label for="task">Oppgavetekst:</label><br /><input type="text" id="task" /><button id="savetask" onclick="save()">Lagre</button></p>
         </section>
         <section id="todos">
             <h2>Oppgaver</h2>
@@ -111,6 +111,13 @@
 
         // Oppdaterer innholdet i #todolist
         document.getElementById("todolistHTML").innerHTML = todoListHTML;
+
+        // Lagre oppgaver i en liste
+        function save() {
+            todos.push({text: document.getElementById("task").value, status: "To do"})
+            console.log("Todo added")
+        }
+            
         
         //CLOCK
         //Klokke-skript tatt herifra: https://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock
