@@ -114,8 +114,31 @@
 
         // Lagre oppgaver i en liste
         function save() {
-            todos.push({text: document.getElementById("task").value, status: "To do"})
-            console.log("Todo added")
+            // Henter inputfeltet
+            const taskInput = document.getElementById("task");
+            const newTaskText = taskInput.value;
+
+            // Sjekk at oppgaveteksten ikke er tom
+            if (newTaskText.trim === "") {
+                alert("Oppgavetekst kan ikke være tom");
+                return;
+            }
+
+            // Legger til ny oppgave i todos
+            todos.push({text: newTaskText, status: "To do"});
+
+            // Oppdaterer oppgavelisten
+            const todoList = document.getElementById("todolist");
+            const newTaskHTML = `<li>
+                <span class="task-text">${newTaskText}</span>
+                <span class="task-status task-status-todo">To do</span>`;
+            todoList.innerHTML += newTaskHTML;
+
+            // Tømmer inputfeltet
+            taskInput.value = "";
+
+            console.log("Oppgave lagret: " + newTaskText);
+            
         }
             
         
