@@ -41,7 +41,37 @@
         const ctx = canvas.getContext("2d")
 
         /* --- YOUR FUNCTIONALITY AND CODE GOES HERE --- */
-        
+        //Array for farger 
+        let colors = []
+
+        //Funksjon for å generere tilfeldige nye farger med math.random
+        function generateRandomColor() {
+            return "#" + Math.floor(Math.random()*16777215).toString(16)
+        }
+
+        //Funksjon for å tegne farger i canvas
+        function drawColors() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            for (let i = 0; i < colors.length; i++) {
+                ctx.fillStyle = colors[i]
+                ctx.fillRect(i * 100, 0, 100, 100)
+            }
+        }
+
+        //Funksjon for å legge til farger
+        function addColor() {
+            //Sjekker om det er 10 farger i arrayen, og stopper funksjonen hvis det er det med en if-test
+            if (colors.length >= 10) {
+                console.log("Du kan ikke legge til flere farger")
+                return
+            }
+            colors.push(generateRandomColor())
+            drawColors()
+            console.log("Farger i palettet:", colors)
+        }
+
+        //addEventlistener som kjører addColor funksjonen når knappen trykkes
+        document.getElementById("addColor").addEventListener("click", addColor);
 
         //requestAnimationFrame
         const requestAnimationFrame = window.requestAnimationFrame || window.msRequestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame
