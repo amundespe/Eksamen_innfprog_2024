@@ -70,6 +70,16 @@
             console.log("Farger i palettet:", colors)
         }
 
+        //Funksjon for å tømme arrayen
+        function emptyArray() {
+            colors = []
+            drawColors()
+            console.log("Palett tømt")
+        }
+
+        //addEventlistener som kjører emptyArray funksjonen når knappen trykkes
+        document.getElementById("emptyArray").addEventListener("click", emptyArray)
+
         //addEventlistener som kjører addColor funksjonen når knappen trykkes
         document.getElementById("addColor").addEventListener("click", addColor);
 
