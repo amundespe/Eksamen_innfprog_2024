@@ -77,6 +77,19 @@
             console.log("Palett tømt")
         }
 
+        //Funksjon for å generere 10 nye farger og bytter ut de gamle
+        function generateAll() {
+            colors = []
+            for (let i = 0; i < 10; i++) {
+                colors.push(generateRandomColor())
+            }
+            drawColors()
+            console.log("10 nye farger generert")
+        }
+
+        //addEventlistener som kjører generateAll funksjonen når knappen trykkes
+        document.getElementById("generateAll").addEventListener("click", generateAll)
+
         //addEventlistener som kjører emptyArray funksjonen når knappen trykkes
         document.getElementById("emptyArray").addEventListener("click", emptyArray)
 
