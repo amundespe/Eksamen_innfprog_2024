@@ -100,48 +100,30 @@
         ]
 
         
-        // Minstekrav 1 - Dynamisk generering av oppgaveliste (må fikses)
-        let todoListHTML = ""
+        // Minstekrav 1 - Riktig utskrift av oppgaver og status
+        let todolist = ""
+
         todos.map((todo, index) => {
-            todoListHTML += `<li>
+            todolist += `<li>
                 <span class="task-text">${todo.text}</span>
                 <span class="task-status task-status-${todo.status.toLowerCase()}">${todo.status}</span>
-            </li>` 
+            </li>`
         })
 
-        // Oppdaterer innholdet i #todolist
-        document.getElementById("todos").innerHTML = todoListHTML;
+        document.getElementById("todolist").innerHTML = todolist
 
-        // Lagre oppgaver i en liste
+        //Lagring av oppgave i oppgavelisten og oppdatering av HTML
         function save() {
-            // Henter inputfeltet
-            const taskInput = document.getElementById("task");
-            const newTaskText = taskInput.value;
-
-            // Sjekk at oppgaveteksten ikke er tom
-            if (newTaskText.trim === "") {
-                alert("Oppgavetekst kan ikke være tom");
-                return;
-            }
-
-            // Legger til ny oppgave i todos
-            todos.push({text: newTaskText, status: "To do"});
-
-            // Oppdaterer oppgavelisten
-            const todoList = document.getElementById("todolist");
-            const newTaskHTML = `<li>
-                <span class="task-text">${newTaskText}</span>
-                <span class="task-status task-status-todo">To do</span>`;
-            todoList.innerHTML += newTaskHTML;
-
-            // Tømmer inputfeltet
-            taskInput.value = "";
-
-            console.log("Oppgave lagret: " + newTaskText);
-            
+            let task = document.getElementById("task").value
+            todos.push({text: task, status: "To do"})
+            todolist += `<li>
+                <span class="task-text">${task}</span>
+                <span class="task-status task-status-todo">To do</span>
+            </li>`
+            document.getElementById("todolist").innerHTML = todolist
         }
-            
-        
+
+
         //CLOCK
         //Klokke-skript tatt herifra: https://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock
         function startTime() {
