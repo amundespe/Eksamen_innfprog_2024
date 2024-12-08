@@ -103,17 +103,24 @@
         // Minstekrav 1 - Riktig utskrift av oppgaver og status
         let todolist = ""
 
+        //Legger til oppgaver i oppgavelisten
         todos.map((todo, index) => {
             todolist += `<li>
                 <span class="task-text">${todo.text}</span>
-                <span class="task-status task-status-${todo.status.toLowerCase()}">${todo.status}</span>
+                <span class="task-status task-status-${todo.status.toLowerCase().replace(" ", "")}">${todo.status}</span>
             </li>`
         })
 
+        //Oppdaterer HTML med oppgavelisten
         document.getElementById("todolist").innerHTML = todolist
 
         //Lagring av oppgave i oppgavelisten og oppdatering av HTML
         function save() {
+            //Sjekker om inputfeltet er tomt 
+            if (document.getElementById("task").value === "") {
+                alert("Du må skrive inn en oppgave.")
+                return
+            }
             let task = document.getElementById("task").value
             todos.push({text: task, status: "To do"})
             todolist += `<li>
