@@ -88,6 +88,23 @@
             console.log("10 nye farger generert")
         }
 
+        //Funksjon for å lagre ny farge 
+        function saveNewColor() {
+            //Sjekker om inputfeltet er tomt
+            if (document.getElementById("newColor").value === "") {
+                alert("Du må skrive inn en farge.")
+                return
+            }
+            let index = document.getElementById("colorSquareIndex").value
+            let newColor = document.getElementById("newColor").value
+            colors[index] = "#" + newColor
+            drawColors()
+            console.log("Farge lagret", colors)
+        }
+
+        //addEventlistener som kjører saveNewColor funksjonen når knappen trykkes
+        document.getElementById("saveNewColor").addEventListener("click", saveNewColor)
+
         //addEventlistener som kjører generateAll funksjonen når knappen trykkes
         document.getElementById("generateAll").addEventListener("click", generateAll)
 

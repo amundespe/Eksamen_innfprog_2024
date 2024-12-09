@@ -131,7 +131,23 @@
             </li>`
             document.getElementById("todolist").innerHTML = todolist
         }
-        
+
+        //BOOKS
+        let booklines = ""
+        books.map((book, index) => {
+            booklines += `<div class="bookline">
+                <span class="booktext">${book.text}</span>
+                <span class="bookdate">${book.date}</span>
+                <span class="bookamount>${book.amount}</span>
+            </div>`
+            balance += book.amount
+        })
+
+        document.getElementById("booklines").innerHTML = booklines
+        document.getElementById("balance").innerHTML = balance
+        document.getElementById("equity").innerHTML = equity + balance
+
+
         //CLOCK
         //Klokke-skript tatt herifra: https://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock
         function startTime() {
