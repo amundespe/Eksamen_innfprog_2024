@@ -64,6 +64,8 @@
             {lastname: "Jansson", firstname: "Sigried", office: "B1", mail: "s.jansson@company.com"}
         ]
 
+        contacts.sort((a, b) => a.lastname.localeCompare(b.lastname)) //Sorterer kontakter alfabetisk etter etternavn, kilde: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+
         //Minstekrav 2 - Gjort epostene klikkbare ved å bruke en mailto-lenke på contact.mail
         let contactlist = ""
         
