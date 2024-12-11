@@ -45,7 +45,7 @@
 
     <script>
         onload = startTime;
-        //Starter klokken når siden lastes
+        //Starter klokken når siden lastes ved å kalle startTime-funksjonen
 
         //CONTACTS
         const contacts = [
@@ -61,6 +61,7 @@
         //Minstekrav 2 - Gjort epostene klikkbare ved å bruke en mailto-lenke på contact.mail
         let contactlist = ""
         
+        //Legger til kontakter i kontaktlisten med map-funksjon
         contacts.map((contact, index) => {
             contactlist += `<article>
                 <p><strong>${contact.lastname}, ${contact.firstname}</strong><br />
@@ -68,6 +69,7 @@
             </article>`
         })
 
+        //Oppdaterer HTML med kontaktlisten
         document.getElementById("contactlist").innerHTML = contactlist
         
         //BOOKS
