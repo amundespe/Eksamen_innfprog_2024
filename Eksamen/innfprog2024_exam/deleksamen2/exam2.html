@@ -56,7 +56,7 @@
             {lastname: "Jansson", firstname: "Sigried", office: "B1", mail: "s.jansson@company.com"}
         ]
 
-        contacts.sort((a, b) => a.lastname.localeCompare(b.lastname)) //Sorterer kontakter alfabetisk etter etternavn, kilde: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+        contacts.sort((a, b) => a.lastname.localeCompare(b.lastname)) //Sorterer kontakter alfabetisk etter etternavn med en sort-funksjon, kilde: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 
         //Minstekrav 2 - Gjort epostene klikkbare ved å bruke en mailto-lenke på contact.mail
         let contactlist = ""
@@ -95,12 +95,12 @@
             {text: "Lag funksjonalitet for å sette en eksisterende oppgave til utført ved å endre status", status: "To do"}
         ]
 
-        
-        // Minstekrav 1 - Riktig utskrift av oppgaver og status
+        //Definerer en variabel for oppgavelisten
         let todolist = ""
 
-        //Legger til oppgaver i oppgavelisten
+        //Legger til oppgaver i oppgavelisten med map-funksjon
         todos.map((todo, index) => {
+            //Legger til oppgaver i todolist-variabelen
             todolist += `<li>
                 <span class="task-text">${todo.text}</span>
                 <span onclick="changeStatus(${index});" class="task-status task-status-${todo.status.toLowerCase().replace(" ", "")}">${todo.status}</span>
@@ -110,15 +110,17 @@
         //Oppdaterer HTML med oppgavelisten
         document.getElementById("todolist").innerHTML = todolist
 
-        //Lagring av oppgave i oppgavelisten og oppdatering av HTML
+        //Funksjon for lagring av oppgave i oppgavelisten og oppdatering av HTML
         function save() {
             let temptodo = ""
-            //Sjekker om inputfeltet er tomt 
+            //Sjekker om inputfeltet er tomt og gir en alert hvis det er det
             if (document.getElementById("task").value === "") {
                 alert("Du må skrive inn en oppgave.")
                 return
             }
+            //Legger til oppgaven i oppgavelisten
             let task = document.getElementById("task").value
+            //Legger til oppgaven i todos-arrayen
             todos.push({text: task, status: "To do"})
             todos.map((todo, index) => {
                 temptodo += `<li>
@@ -126,27 +128,33 @@
                     <span onclick="changeStatus(${index});" class="task-status task-status-${todo.status.toLowerCase().replace(" ", "")}">${todo.status}</span>
                 </li>`
             })
+            //Oppdaterer HTML med oppgavelisten
             todolist = temptodo
             document.getElementById("todolist").innerHTML = todolist
         }
 
         //BOOKS
+        //Definerer variabel for bokføringer
         let booklines = ""
         books.map((book, index) => {
+            //Legger til bokføringer i booklines-variabelen
             booklines += `<div class="bookline">
                 <span class="booktext">${book.text}</span>
                 <span class="bookdate">${book.date}</span>
                 <span class="bookamount">${book.amount}</span>
             </div>`
+            //Legger til bokføringens sum i balanse-variabelen
             balance += book.amount
         })
 
+        //Oppdaterer HTML med bokføringer, balanse og egenkapital, samt regner ut egenkapital
         document.getElementById("booklines").innerHTML = booklines
         document.getElementById("balance").innerHTML = balance
         document.getElementById("equity").innerHTML = equity + balance
 
         //Funksjon for å endre status på oppgave
         function changeStatus(index) {
+            //Sjekker om oppgaven er utført, og endrer status til "Done" hvis den er "To do"
             if (todos[index].status === "To do") {
                 todos[index].status = "Done"
             }
@@ -172,7 +180,7 @@
         }
 
         function checkTime(i) {
-            if (i < 10) {i = "0" + i};  // legger til en null foran tall mindre enn 10
+            if (i < 10) {i = "0" + i};  //Legger til en null foran tall mindre enn 10
             return i;
         }
     </script>
