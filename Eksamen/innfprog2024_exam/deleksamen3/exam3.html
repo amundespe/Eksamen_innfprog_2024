@@ -75,7 +75,6 @@
                 ctx.font = "15px Arial"
                 ctx.fillStyle = colors[i]
                 ctx.textBaseline = "bottom"
-                //ctx.textAlign = "right"
                 ctx.fillText(i + 1, i * 100 + 82, 100)
             }
         }
@@ -113,18 +112,19 @@
         //Funksjon for å lagre ny farge 
         function saveNewColor() {
 
+            //Henter indexen og fargekoden fra inputfeltene
             let index = document.getElementById("colorSquareIndex").value
             let newColor = document.getElementById("newColor").value
             //Lager en variabel som er en int av indexen + 1 for å skrive ut riktig nummer i alerten
             let maxIndex = parseInt(index) + 1
 
-            //Sjekker om arrayet er tomt
+            //Sjekker om arrayet er tomt og gir en alert hvis det er det
             if (colors.length === 0) {
                 alert("Det er ingen firkanter som kan bytte farge ennå.")
                 return
             }
             
-            //Sjekker om inputfeltet er tomt
+            //Sjekker om inputfeltet er tomt og gir en alert hvis det er det
             if (document.getElementById("newColor").value === "") {
                 alert("Du må skrive inn en farge.");
                 return;
@@ -136,11 +136,13 @@
             }
 
             //Sjekker om fargekoden er gyldig med en regex, kilde: https://stackoverflow.com/questions/8027423/how-to-check-if-a-string-is-a-valid-hex-color-representation/8027444
+            //Hvis fargekoden ikke er gyldig, gir den en alert
             if (!newColor.match(/^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
                 alert("Du har skrevet " + newColor + ". Dette er ikke en gyldig fargekode.")
                 return
             }
             
+            //Bytter ut fargen i arrayen med den nye fargen
             colors[index] = "#" + newColor
             drawColors()
             console.log("Farge lagret", colors)
